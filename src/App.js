@@ -3,8 +3,7 @@ import {
   RangeInput,
   ReactiveBase,
   ReactiveList,
-  SingleList,
-  ToggleButton
+  SingleList
 } from "@appbaseio/reactivesearch";
 import React, { Component } from "react";
 
@@ -12,8 +11,8 @@ class App extends Component {
   render() {
     return (
       <ReactiveBase
-        app="wikitren2"
-        credentials="K6lcmd43r:e6ef2d31-983e-4def-9055-9823fc017bf6"
+        app="wikitrentest"
+        credentials="WXT4ynLQD:d882d5ab-5e43-4d13-86cc-8a62525ddc65"
       >
         <div style={{ display: "flex", flexDirection: "row" }}>
           <div
@@ -22,7 +21,7 @@ class App extends Component {
             <DataSearch
               componentId="search"
               dataField={[
-                "kiai",
+                "pendiri",
                 "nomor",
                 "yayasan",
                 "nama",
@@ -33,28 +32,19 @@ class App extends Component {
                 "yayasan.search",
                 "nomor.autosuggest",
                 "nomor.search",
-                "kiai.autosuggest",
-                "kiai.keyword",
-                "kiai.search"
+                "pendiri.autosuggest",
+                "pendiri.keyword",
+                "pendiri.search"
               ]}
               fieldWeights={[7, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]}
               fuzziness={0}
-              highlightField={["nama", "yayasan", "nomor", "kiai"]}
-              placeholder="Cari berdasarkan nama, yayasan, nomor, atau nama kiai"
+              highlightField={["nama", "yayasan", "nomor", "pendiri"]}
+              placeholder="Cari berdasarkan nama, yayasan, nomor, atau nama pendiri"
+              // placeholder="Cari berdasarkan nama"
               style={{
                 marginBottom: 20
               }}
               title="Cari"
-            />
-            <ToggleButton
-              title="Berbadan Hukum"
-              componentId="BerbadanHukum"
-              dataField="berbadan_hukum"
-              multiSelect={false}
-              data={[
-                { label: "Ya", value: true },
-                { label: "Tidak", value: false }
-              ]}
             />
             <RangeInput
               componentId="Tahun"
@@ -65,7 +55,7 @@ class App extends Component {
                 end: 2019
               }}
               rangeLabels={{
-                start: "1900",
+                start: "1920",
                 end: "2019"
               }}
               showFilter={true}
@@ -77,47 +67,36 @@ class App extends Component {
               }}
               URLParams={false}
             />
+            {/* <SingleDropdownList
+              componentId="Kabupaten"
+              dataField="kabupaten.keyword"
+              title="Kabupaten"
+              size={1000}
+              sortBy="count"
+              // defaultSelected="London"
+              showCount={true}
+              placeholder="Cari Kabupaten"
+              selectAllLabel="All Cities"
+              react={{
+                and: ["CategoryFilter", "SearchFilter"]
+              }}
+              showFilter={true}
+              filterLabel="City"
+              URLParams={false}
+              loader="Loading ..."
+            /> */}
             <SingleList
               componentId="Kabupaten"
               dataField="kabupaten.keyword"
-              size={3}
               sortBy="count"
               showRadio={true}
               showCount={true}
               showSearch={true}
-              showFilter={false}
+              showFilter={true}
               style={{
                 marginBottom: 20
               }}
               title="Kabupaten"
-            />
-            <SingleList
-              componentId="Kecamatan"
-              dataField="kecamatan.keyword"
-              size={3}
-              sortBy="count"
-              showRadio={true}
-              showCount={true}
-              showSearch={true}
-              showFilter={false}
-              style={{
-                marginBottom: 20
-              }}
-              title="Kecamatan"
-            />
-            <SingleList
-              componentId="Kelurahan"
-              dataField="kelurahan.keyword"
-              size={3}
-              sortBy="count"
-              showRadio={true}
-              showCount={true}
-              showSearch={true}
-              showFilter={false}
-              style={{
-                marginBottom: 20
-              }}
-              title="Kelurahan"
             />
           </div>
           <div style={{ marginLeft: "10%" }}>
@@ -142,7 +121,7 @@ class App extends Component {
                 return (
                   <div key={res.id}>
                     <h3>{res.nama}</h3>
-                    <h5>{res.kiai.join(", ")}</h5>
+                    <h5>{res.pendiri}</h5>
                     <hr />
                   </div>
                 );
